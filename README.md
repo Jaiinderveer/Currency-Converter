@@ -1,1 +1,1 @@
-# Currency-Converter
+Currency converter using currencyAPI
