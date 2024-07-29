@@ -20,7 +20,7 @@ const updateExchangeRate = async () => {
         if (!response.ok) throw new Error('Network response was not ok');
         let data = await response.json();
 
-        // Ensure the rates data is available
+       
         let rates = data.data;
         if (!rates[fromCurr.value] || !rates[toCurr.value]) {
             throw new Error("Invalid currency code");
@@ -29,12 +29,12 @@ const updateExchangeRate = async () => {
         let fromRate = rates[fromCurr.value].value;
         let toRate = rates[toCurr.value].value;
 
-        // Check if rates are valid numbers
+       
         if (isNaN(fromRate) || isNaN(toRate)) {
             throw new Error("Invalid rate data");
         }
 
-        // Calculate the conversion rate
+        
         let rate = toRate / fromRate;
         let finalAmount = amountVal * rate;
         msg.innerText = `${amountVal} ${fromCurr.value} = ${finalAmount.toFixed(2)} ${toCurr.value}`;
@@ -47,7 +47,6 @@ window.addEventListener("load", () => {
     updateExchangeRate();
 })
 
-// Populate dropdowns with currency codes
 for (let select of dropdownSelects) {
     for (let currCode in countryList) {
         let newOption = document.createElement("option");
@@ -65,7 +64,7 @@ for (let select of dropdownSelects) {
     });
 }
 
-// Update flag images based on currency selection
+
 const updateFlag = (element) => {
     let currCode = element.value;
     let countryCode = countryList[currCode];
@@ -73,8 +72,7 @@ const updateFlag = (element) => {
     let img = element.parentElement.querySelector("img");
     img.src = newSrc;
 };
-
-// Handle button click to perform currency conversion
+
 btn.addEventListener("click", (evt) => {
     evt.preventDefault();
     updateExchangeRate();
